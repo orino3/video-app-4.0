@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sports Video Coaching Platform
 
-## Getting Started
+A comprehensive video analysis platform for sports teams, built with Next.js 15 and Supabase.
 
-First, run the development server:
+## Features
+
+- 🎥 Video upload and YouTube integration
+- ✏️ Advanced annotation system (drawings, notes, loops, tags, player mentions)
+- 👥 Team management with role-based permissions
+- 🔒 Secure authentication with Supabase Auth
+- 📊 Analytics and monitoring with Sentry
+- 🚀 Optimized for performance with Vercel
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Backend**: Supabase (PostgreSQL, Auth, Storage)
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand, TanStack Query
+- **Monitoring**: Sentry, Vercel Analytics
+
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and configure:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_SENTRY_DSN=your_sentry_dsn
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+## Production Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project is optimized for deployment on Vercel. See deployment guide in the repository.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Private - All rights reserved

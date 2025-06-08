@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clear Cache</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    button {
+      background-color: #dc2626;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background-color: #b91c1c;
+    }
+    .success {
+      color: green;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Clear Application Cache</h1>
+  <p>Use this page to clear all cached data for the coaching platform.</p>
+  
+  <button onclick="clearAllData()">Clear All Cache & Reload</button>
+  <button onclick="clearTeamData()">Clear Team Selection Only</button>
+  
+  <div id="status"></div>
+  
+  <script>
+    function clearAllData() {
+      // Clear localStorage
+      localStorage.clear();
+      
+      // Clear sessionStorage
+      sessionStorage.clear();
+      
+      // Clear cookies for localhost
+      document.cookie.split(";").forEach(function(c) { 
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+      });
+      
+      // Clear IndexedDB
+      if ('indexedDB' in window) {
+        indexedDB.databases().then(databases => {
+          databases.forEach(db => indexedDB.deleteDatabase(db.name));
+        });
+      }
+      
+      document.getElementById('status').innerHTML = '<p class="success">All cache cleared! Redirecting to login...</p>';
+      
+      setTimeout(() => {
+        window.location.href = '/auth/login';
+      }, 2000);
+    }
+    
+    function clearTeamData() {
+      localStorage.removeItem('activeTeamId');
+      sessionStorage.removeItem('activeTeamId');
+      
+      document.getElementById('status').innerHTML = '<p class="success">Team selection cleared! Redirecting to dashboard...</p>';
+      
+      setTimeout(() => {
+        window.location.href = '/dashboard';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
