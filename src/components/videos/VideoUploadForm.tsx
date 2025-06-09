@@ -22,7 +22,7 @@ export function VideoUploadForm({ onSuccess, onCancel }: VideoUploadFormProps) {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const { user, teams } = useAuth();
+  const { user } = useAuth();
   const { getActiveTeam } = useAuthStore();
   const router = useRouter();
   const supabase = createClient();
@@ -108,7 +108,6 @@ export function VideoUploadForm({ onSuccess, onCancel }: VideoUploadFormProps) {
     try {
       // Create file path: {team_id}/videos/{timestamp}_{filename}
       const timestamp = Date.now();
-      const fileExtension = file.name.split('.').pop();
       const fileName = `${timestamp}_${file.name}`;
       const filePath = `${currentTeam.id}/videos/${fileName}`;
 
@@ -121,7 +120,7 @@ export function VideoUploadForm({ onSuccess, onCancel }: VideoUploadFormProps) {
         teamId: currentTeam.id,
       });
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('videos')
         .upload(filePath, file, {
           onUploadProgress: (progress) => {

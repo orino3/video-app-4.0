@@ -52,9 +52,11 @@ export interface IVideoPlayer {
   ): void;
 }
 
+type EventHandler = (...args: any[]) => void;
+
 export abstract class BaseVideoPlayer implements IVideoPlayer {
   protected container: HTMLElement | null = null;
-  protected eventHandlers: Map<keyof VideoPlayerEvents, Set<Function>> =
+  protected eventHandlers: Map<keyof VideoPlayerEvents, Set<EventHandler>> =
     new Map();
 
   abstract play(): Promise<void>;
@@ -78,7 +80,7 @@ export abstract class BaseVideoPlayer implements IVideoPlayer {
     if (!this.eventHandlers.has(event)) {
       this.eventHandlers.set(event, new Set());
     }
-    this.eventHandlers.get(event)!.add(handler);
+    this.eventHandlers.get(event)!.add(handler as EventHandler);
   }
 
   off<K extends keyof VideoPlayerEvents>(
@@ -87,7 +89,7 @@ export abstract class BaseVideoPlayer implements IVideoPlayer {
   ): void {
     const handlers = this.eventHandlers.get(event);
     if (handlers) {
-      handlers.delete(handler);
+      handlers.delete(handler as EventHandler);
     }
   }
 
@@ -98,7 +100,7 @@ export abstract class BaseVideoPlayer implements IVideoPlayer {
     const handlers = this.eventHandlers.get(event);
     if (handlers) {
       handlers.forEach((handler) => {
-        (handler as Function)(...args);
+        handler(...args);
       });
     }
   }

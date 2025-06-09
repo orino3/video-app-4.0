@@ -79,7 +79,7 @@ export class HTML5PlayerAdapter extends BaseVideoPlayer {
       this.emit('onEnded');
     });
 
-    addListener('error', (e) => {
+    addListener('error', () => {
       const error = this.video?.error;
       const message = error
         ? `Video error: ${error.message}`

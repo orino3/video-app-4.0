@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 
 interface AnnotationMenuProps {
   onSelectType: (type: 'note' | 'draw' | 'loop' | 'tag') => void;

@@ -55,7 +55,6 @@ export function CompactTagSelector({
   initialTags = [],
 }: CompactTagSelectorProps) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>(initialTags);
-  const [showMore, setShowMore] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   const toggleTag = (tag: Tag) => {

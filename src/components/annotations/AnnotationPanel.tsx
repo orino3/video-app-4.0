@@ -25,7 +25,6 @@ interface AnnotationPanelProps {
 }
 
 export function AnnotationPanel({
-  annotationId,
   timestamp,
   title,
   onTitleChange,
