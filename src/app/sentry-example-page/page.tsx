@@ -9,9 +9,9 @@ export default function SentryExamplePage() {
   const checkSentry = () => {
     console.log('Checking Sentry configuration...');
     console.log('DSN:', process.env.NEXT_PUBLIC_SENTRY_DSN);
-    console.log('Sentry initialized:', !!Sentry.getCurrentHub().getClient());
+    console.log('Sentry initialized:', !!Sentry.getCurrentScope().getClient());
     
-    const client = Sentry.getCurrentHub().getClient();
+    const client = Sentry.getCurrentScope().getClient();
     if (client) {
       const options = client.getOptions();
       console.log('Sentry options:', options);
