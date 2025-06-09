@@ -1,5 +1,7 @@
 # Sports Video Coaching Platform
 
+![Deploy Status](https://img.shields.io/badge/deploy-ready-green)
+
 A comprehensive video analysis platform for sports teams, built with Next.js 15 and Supabase.
 
 ## Features
