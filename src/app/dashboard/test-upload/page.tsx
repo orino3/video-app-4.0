@@ -80,7 +80,8 @@ export default function TestUploadPage() {
         }
       }
     } catch (err) {
-      setMessage((prev) => prev + `\n❌ Unexpected error: ${err.message}\n`);
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setMessage((prev) => prev + `\n❌ Unexpected error: ${errorMessage}\n`);
     } finally {
       setLoading(false);
     }
