@@ -67,7 +67,7 @@ export default function AcceptInvitePage() {
   };
 
   const handleAccept = async () => {
-    if (!invitation) return;
+    if (!invitation || !token) return;
 
     setAccepting(true);
     setError(null);
