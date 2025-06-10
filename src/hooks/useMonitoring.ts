@@ -1,6 +1,5 @@
 import { useAuth } from '@/hooks/useAuth';
 import { createClient } from '@/lib/supabase/client';
-import * as Sentry from '@sentry/nextjs';
 
 interface EventProperties {
   [key: string]: any;
@@ -17,14 +16,6 @@ export function useMonitoring() {
       console.log('📊 Event:', event, properties);
       return;
     }
-
-    // Log to Sentry as breadcrumb
-    Sentry.addBreadcrumb({
-      message: event,
-      category: 'user-action',
-      level: 'info',
-      data: properties,
-    });
 
     // Log to Supabase analytics table
     try {
@@ -49,16 +40,13 @@ export function useMonitoring() {
   const trackError = (error: Error, context?: EventProperties) => {
     console.error('Application error:', error);
     
-    // Send to Sentry with context
-    Sentry.captureException(error, {
-      contexts: {
-        custom: context || {},
-      },
-      user: user ? {
-        id: user.id,
-        email: user.email,
-      } : undefined,
-    });
+    // Log error details to console with context
+    if (context) {
+      console.error('Error context:', context);
+    }
+    
+    // In production, you might want to send this to a different error tracking service
+    // For now, we'll just log it
   };
 
   const trackPerformance = (name: string, duration: number, properties?: EventProperties) => {
@@ -66,16 +54,9 @@ export function useMonitoring() {
     if (process.env.NODE_ENV === 'development') {
       console.log(`⏱️ Performance: ${name} took ${duration}ms`, properties);
     }
-
-    // Send to Sentry as a custom metric
-    Sentry.setMeasurement(name, duration, 'millisecond');
     
-    // Add context for the performance metric
-    Sentry.setContext('performance', {
-      name,
-      duration,
-      ...properties,
-    });
+    // In production, you might want to send this to an analytics service
+    // For now, we'll just log it
   };
 
   return {
