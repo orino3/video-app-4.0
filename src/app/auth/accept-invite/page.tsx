@@ -27,6 +27,12 @@ export default function AcceptInvitePage() {
   }, [token]);
 
   const fetchInvitation = async () => {
+    if (!token) {
+      setError('No invitation token provided');
+      setLoading(false);
+      return;
+    }
+    
     try {
       const { data, error } = await supabase
         .from('team_invitations')
@@ -74,7 +80,11 @@ export default function AcceptInvitePage() {
 
       if (!user) {
         // Redirect to signup with invitation token
-        router.push(`/auth/signup?invite=${token}`);
+        if (token) {
+          router.push(`/auth/signup?invite=${token}`);
+        } else {
+          router.push('/auth/signup');
+        }
         return;
       }
 
