@@ -13,7 +13,7 @@ interface DeletedTeam {
   id: string;
   name: string;
   sport: string;
-  deleted_at: string;
+  deleted_at: string | null;
   organization?: {
     name: string;
   } | null;
