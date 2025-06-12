@@ -4,11 +4,6 @@
   "installCommand": "cd coaching-platform && npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
-  "functions": {
-    "coaching-platform/src/app/api/**.ts": {
-      "maxDuration": 30
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   }
