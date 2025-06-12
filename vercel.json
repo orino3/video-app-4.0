@@ -1,10 +1,11 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
+  "buildCommand": "cd coaching-platform && npm run build",
+  "outputDirectory": "coaching-platform/.next",
+  "installCommand": "cd coaching-platform && npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
   "functions": {
-    "src/app/api/**.ts": {
+    "coaching-platform/src/app/api/**.ts": {
       "maxDuration": 30
     }
   },
