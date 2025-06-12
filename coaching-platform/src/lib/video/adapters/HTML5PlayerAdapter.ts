@@ -24,16 +24,28 @@ export class HTML5PlayerAdapter extends BaseVideoPlayer {
 
     // Get signed URL from Supabase storage
     if (this.storagePath) {
-      const { data: signedUrlData, error } = await this.supabase.storage
-        .from('videos')
-        .createSignedUrl(this.storagePath, 3600); // 1 hour expiry
+      try {
+        // Use server-side API to generate signed URL
+        const response = await fetch('/api/videos/signed-url', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ storagePath: this.storagePath }),
+        });
 
-      if (error) {
-        this.emit('onError', error.message);
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Failed to get video URL');
+        }
+
+        const { signedUrl } = await response.json();
+        this.video.src = signedUrl;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Failed to load video';
+        this.emit('onError', message);
         throw error;
       }
-
-      this.video.src = signedUrlData.signedUrl;
     } else {
       this.video.src = this.videoUrl;
     }
