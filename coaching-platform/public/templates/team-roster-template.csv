@@ -1,0 +1,6 @@
+full_name,email,jersey_number,position,role,phone_number,whatsapp_number
+John Doe,john.doe@example.com,7,Forward,player,+1234567890,+1234567890
+Jane Smith,jane.smith@example.com,10,Midfielder,player,+0987654321,+0987654321
+Mike Johnson,,23,Defender,player,,
+Sarah Williams,,15,Goalkeeper,player,,
+Coach Wilson,coach.wilson@example.com,,,coach,+1122334455,+1122334455
