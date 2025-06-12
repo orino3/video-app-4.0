@@ -1,6 +1,14 @@
 {
-  "buildCommand": "cd coaching-platform && npm run build",
-  "outputDirectory": "coaching-platform/.next",
-  "installCommand": "cd coaching-platform && npm install",
-  "devCommand": "cd coaching-platform && npm run dev"
+  "builds": [
+    {
+      "src": "coaching-platform/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/coaching-platform/$1"
+    }
+  ]
 }
